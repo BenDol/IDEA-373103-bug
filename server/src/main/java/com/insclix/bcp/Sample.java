@@ -21,7 +21,11 @@ package com.insclix.bcp;
 
 import org.springframework.security.oauth2.core.oidc.OidcUserInfo;
 
+import java.util.Map;
+
 public class Sample extends OidcUserInfo {
 
-
+    public Sample(Map<String, Object> additionalParameters) {
+        super(additionalParameters);
+    }
 }

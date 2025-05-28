@@ -1,0 +1,1139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.insclix.core</groupId>
+  <artifactId>insclix-core-bom</artifactId>
+  <version>3.0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <properties>
+    <project.encoding>UTF-8</project.encoding>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <active.profile>dev</active.profile>
+
+    <java.version>17</java.version>
+
+    <!-- client -->
+    <gwt.version>2.12.2</gwt.version>
+    <gwt-material.version>2.8.5</gwt-material.version>
+    <gwt-crypto.version>2.3.0</gwt-crypto.version>
+    <slf4gwt.version>1.4</slf4gwt.version>
+    <elemental2.version>1.0.0-RC1</elemental2.version>
+    <gwt-jackson.version>0.15.4</gwt-jackson.version>
+    <errai.version>4.14.0.Final</errai.version>
+
+    <!-- server -->
+    <spring-boot.version>3.5.0</spring-boot.version>
+    <spring-framework.version>6.2.7</spring-framework.version>
+    <spring-context.version>6.2.6</spring-context.version> <!-- Temp fix for regression https://github.com/GoogleCloudPlatform/spring-cloud-gcp/issues/3794#issuecomment-2909613423 -->
+    <spring-data-commons.version>3.5.0</spring-data-commons.version>
+    <spring-data-jpa.version>3.5.0</spring-data-jpa.version>
+    <spring-data-redis.version>3.5.0</spring-data-redis.version>
+    <spring-security.version>6.5.0</spring-security.version>
+    <spring-cloud.version>2025.0.0-RC1</spring-cloud.version>
+    <spring-cloud-gcp.version>6.2.1</spring-cloud-gcp.version>
+    <spring-session.version>3.5.0</spring-session.version>
+    <spring-retry.version>2.0.12</spring-retry.version>
+    <lettuce.version>6.6.0.RELEASE</lettuce.version>
+    <springboot-graceful-shutdown.version>2.0.1</springboot-graceful-shutdown.version>
+    <thymeleaf-extras-springsecurity6.version>3.1.3.RELEASE</thymeleaf-extras-springsecurity6.version>
+    <javax.annotation.version>1.2</javax.annotation.version> <!-- for use in GWT shared libs -->
+    <jakarta.servlet.version>6.1.0</jakarta.servlet.version>
+    <jakarta.annotation.version>3.0.0</jakarta.annotation.version>
+    <jakarta.validation.version>3.1.1</jakarta.validation.version>
+    <jakarta.persistence.version>3.2.0</jakarta.persistence.version>
+    <jakarta.el.version>6.0.1</jakarta.el.version>
+    <jakarta.xml.ws.version>4.0.2</jakarta.xml.ws.version>
+    <jakarta.ws.rs.version>4.0.0</jakarta.ws.rs.version>
+    <jaxws-ri.version>4.0.3</jaxws-ri.version>
+    <reflections.version>0.10.2</reflections.version>
+    <logback.version>1.5.18</logback.version>
+    <logback-logtail.version>0.3.4</logback-logtail.version>
+    <httpcore.version>4.4.16</httpcore.version>
+    <httpcore-nio.version>4.4.16</httpcore-nio.version>
+    <httpclient.version>4.5.14</httpclient.version>
+    <httpclient5.version>5.4.4</httpclient5.version>
+    <httpasyncclient.version>4.1.5</httpasyncclient.version>
+    <commons-beanutils.version>1.10.1</commons-beanutils.version>
+    <commons-fileupload.version>1.5</commons-fileupload.version>
+    <commons-io.version>2.19.0</commons-io.version>
+    <commons-compress.version>1.27.1</commons-compress.version>
+    <gson.version>2.13.1</gson.version>
+    <guice.version>5.1.0</guice.version>
+    <swagger.version>1.6.15</swagger.version>
+    <asm.version>9.8</asm.version>
+    <aspectj.version>1.9.24</aspectj.version>
+    <retry4j.version>0.15.0</retry4j.version>
+    <imgscalr-lib.version>4.2</imgscalr-lib.version>
+    <beanstream.version>1.0.0</beanstream.version>
+    <feign.version>8.18.0</feign.version>
+    <pdfbox.version>2.0.25</pdfbox.version>
+    <prometheus.version>0.16.0</prometheus.version>
+    <passay.version>1.6.6</passay.version>
+    <netty.version>4.2.1.Final</netty.version>
+    <jdbc-socket-factory.version>1.25.0</jdbc-socket-factory.version>
+    <jackson.version>2.19.0</jackson.version>
+    <freemarker.version>2.3.34</freemarker.version>
+    <slf4j.version>2.0.17</slf4j.version>
+    <jjwt.version>0.6.0</jjwt.version>
+    <joda-time.version>2.14.0</joda-time.version>
+    <evo-inflector.version>1.3</evo-inflector.version>
+    <owasp-java-html-sanitizer.version>20240325.1</owasp-java-html-sanitizer.version>
+    <safety-mirror.version>4.0.1</safety-mirror.version>
+    <jetbrains.version>26.0.2</jetbrains.version>
+    <google-api-client.version>	2.7.2</google-api-client.version>
+    <google-api-gax.version>2.66.0</google-api-gax.version>
+    <google-cloud-recaptchaenterprise.version>3.60.0</google-cloud-recaptchaenterprise.version>
+    <jasperreports.version>7.0.3</jasperreports.version>
+    <aspose-words.version>25.4</aspose-words.version>
+    <lombok.version>1.18.38</lombok.version>
+    <aerogear-otp-java.version>1.0.0</aerogear-otp-java.version>
+    <twilio.version>10.9.0</twilio.version>
+    <libphonenumber.version>9.0.5</libphonenumber.version>
+    <jaxws-rt.version>4.0.3</jaxws-rt.version>
+    <snakeyaml.version>2.4</snakeyaml.version>
+    <protobuf-java.version>4.31.0</protobuf-java.version>
+    <json.version>20250107</json.version>
+
+    <!-- apt -->
+    <apt-tools.version>0.0.3</apt-tools.version>
+    <auto-service.version>1.1.1</auto-service.version>
+    <guava.version>33.4.8-jre</guava.version>
+    <ap-commons.version>0.0.2</ap-commons.version>
+    <ant.version>1.10.15</ant.version>
+    <commons-configuration.version>1.10</commons-configuration.version>
+
+    <!-- testing -->
+    <junit.version>4.12</junit.version>
+  </properties>
+
+  <!-- Repositories -->
+  <repositories>
+    <repository>
+      <id>central</id>
+      <name>Central Repository</name>
+      <url>https://repo.maven.apache.org/maven2</url>
+    </repository>
+    <repository>
+      <id>sonatype-nexus-snapshot</id>
+      <name>Sonatype Nexus snapshot repository</name>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+    </repository>
+    <repository>
+      <id>spring-repo</id>
+      <name>Spring Release Repository</name>
+      <url>https://repo.spring.io/release</url>
+    </repository>
+    <repository>
+      <id>spring-milestone</id>
+      <name>Spring Milestone Repository</name>
+      <url>https://repo.spring.io/milestone</url>
+    </repository>
+    <repository>
+      <id>AsposeJavaAPI</id>
+      <name>Aspose Java API</name>
+      <url>https://releases.aspose.com/java/repo/</url>
+    </repository>
+  </repositories>
+
+  <dependencyManagement>
+    <dependencies>
+      <!-- Insclix Internal Dependencies -->
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>insclix-shared</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>insclix-shared</artifactId>
+        <version>${project.version}</version>
+        <classifier>sources</classifier>
+      </dependency>
+     
+      <dependency>
+        <groupId>org.jboss.errai.bom</groupId>
+        <artifactId>errai-bom</artifactId>
+        <version>${errai.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.jboss.errai</groupId>
+        <artifactId>errai-security-client</artifactId>
+        <version>${errai.version}</version>
+        <exclusions>
+          <exclusion>
+            <groupId>jakarta.interceptor</groupId>
+            <artifactId>jakarta.interceptor-api</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>jakarta.persistence</groupId>
+            <artifactId>jakarta.persistence-api</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>jakarta.el</groupId>
+            <artifactId>jakarta.el-api</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>jakarta.ws.rs</groupId>
+            <artifactId>jakarta.ws.rs-api</artifactId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+      <dependency>
+        <groupId>org.jboss.errai</groupId>
+        <artifactId>errai-common</artifactId>
+        <version>${errai.version}</version>
+        <exclusions>
+          <exclusion>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+          </exclusion>
+          <!--<exclusion>
+            <groupId>de.benediktmeurer.gwt-slf4j</groupId>
+            <artifactId>gwt-slf4j</artifactId>
+          </exclusion>-->
+        </exclusions>
+      </dependency>
+
+      <!-- Prometheus -->
+      <dependency>
+        <groupId>io.prometheus</groupId>
+        <artifactId>simpleclient</artifactId>
+        <version>${prometheus.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.prometheus</groupId>
+        <artifactId>simpleclient_common</artifactId>
+        <version>${prometheus.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.prometheus</groupId>
+        <artifactId>simpleclient_hotspot</artifactId>
+        <version>${prometheus.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.prometheus</groupId>
+        <artifactId>simpleclient_spring_boot</artifactId>
+        <version>${prometheus.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.prometheus</groupId>
+        <artifactId>simpleclient_spring_web</artifactId>
+        <version>${prometheus.version}</version>
+      </dependency>
+
+      <!-- Jackson -->
+      <dependency>
+        <groupId>com.fasterxml.jackson</groupId>
+        <artifactId>jackson-bom</artifactId>
+        <version>${jackson.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-annotations</artifactId>
+        <version>${jackson.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-core</artifactId>
+        <version>${jackson.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-databind</artifactId>
+        <version>${jackson.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.fasterxml.jackson.dataformat</groupId>
+        <artifactId>jackson-dataformat-xml</artifactId>
+        <version>${jackson.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.fasterxml.jackson.datatype</groupId>
+        <artifactId>jackson-datatype-hibernate5</artifactId>
+        <version>${jackson.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.fasterxml.jackson.datatype</groupId>
+        <artifactId>jackson-datatype-jdk8</artifactId>
+        <version>${jackson.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.fasterxml.jackson.datatype</groupId>
+        <artifactId>jackson-datatype-jsr310</artifactId>
+        <version>${jackson.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.fasterxml.jackson.module</groupId>
+        <artifactId>jackson-module-jaxb-annotations</artifactId>
+        <version>${jackson.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.fasterxml.jackson.module</groupId>
+        <artifactId>jackson-module-parameter-names</artifactId>
+        <version>${jackson.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.fasterxml.jackson.datatype</groupId>
+        <artifactId>jackson-datatype-joda</artifactId>
+        <version>${jackson.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.fasterxml.jackson.dataformat</groupId>
+        <artifactId>jackson-dataformat-csv</artifactId>
+        <version>${jackson.version}</version>
+      </dependency>
+
+      <!-- GWT Jackson -->
+      <dependency>
+        <groupId>com.github.nmorel.gwtjackson</groupId>
+        <artifactId>gwt-jackson</artifactId>
+        <version>${gwt-jackson.version}</version>
+      </dependency>
+
+      <!-- GWT -->
+      <dependency>
+        <groupId>org.gwtproject</groupId>
+        <artifactId>gwt</artifactId>
+        <version>${gwt.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.gwtproject</groupId>
+        <artifactId>gwt-user</artifactId>
+        <version>${gwt.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.gwtproject</groupId>
+        <artifactId>gwt-dev</artifactId>
+        <version>${gwt.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.googlecode.gwt-crypto</groupId>
+        <artifactId>gwt-crypto</artifactId>
+        <version>${gwt-crypto.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.slf4gwt</groupId>
+        <artifactId>slf4gwt</artifactId>
+        <version>${slf4gwt.version}</version>
+        <classifier>sources</classifier>
+      </dependency>
+
+      <!-- Spring Boot -->
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-dependencies</artifactId>
+        <version>${spring-boot.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+      <!-- Spring Cloud -->
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-dependencies</artifactId>
+        <version>${spring-cloud.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+      <!-- Spring Cloud GCP -->
+      <dependency>
+        <groupId>com.google.cloud</groupId>
+        <artifactId>spring-cloud-gcp-dependencies</artifactId>
+        <version>${spring-cloud-gcp.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>com.google.protobuf</groupId>
+        <artifactId>protobuf-bom</artifactId>
+        <version>${protobuf-java.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>com.google.protobuf</groupId>
+        <artifactId>protobuf-java</artifactId>
+        <version>${protobuf-java.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.google.cloud</groupId>
+        <artifactId>spring-cloud-gcp-starter-secretmanager</artifactId>
+        <version>${spring-cloud-gcp.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.google.cloud.sql</groupId>
+        <artifactId>jdbc-socket-factory-core</artifactId>
+        <version>${jdbc-socket-factory.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.springframework.data</groupId>
+        <artifactId>spring-data-redis</artifactId>
+        <version>${spring-data-redis.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.springframework.retry</groupId>
+        <artifactId>spring-retry</artifactId>
+        <version>${spring-retry.version}</version>
+      </dependency>
+
+      <!-- Temp fix for regression: https://github.com/GoogleCloudPlatform/spring-cloud-gcp/issues/3794#issuecomment-2909613423 -->
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-context</artifactId>
+        <version>${spring-context.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-webmvc</artifactId>
+        <version>${spring-framework.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-web</artifactId>
+        <version>${spring-framework.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-web</artifactId>
+        <version>${spring-framework.version}</version>
+        <classifier>sources</classifier>
+      </dependency>
+
+      <dependency>
+        <groupId>org.springframework.security</groupId>
+        <artifactId>spring-security-core</artifactId>
+        <version>${spring-security.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.security</groupId>
+        <artifactId>spring-security-core</artifactId>
+        <version>${spring-security.version}</version>
+        <classifier>sources</classifier>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.security</groupId>
+        <artifactId>spring-security-oauth2-core</artifactId>
+        <version>${spring-security.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.security</groupId>
+        <artifactId>spring-security-oauth2-core</artifactId>
+        <version>${spring-security.version}</version>
+        <classifier>sources</classifier>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.security</groupId>
+        <artifactId>spring-security-oauth2-client</artifactId>
+        <version>${spring-security.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.security</groupId>
+        <artifactId>spring-security-web</artifactId>
+        <version>${spring-security.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.security</groupId>
+        <artifactId>spring-security-crypto</artifactId>
+        <version>${spring-security.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.springframework.data</groupId>
+        <artifactId>spring-data-commons</artifactId>
+        <version>${spring-data-commons.version}</version>
+        <scope>provided</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.data</groupId>
+        <artifactId>spring-data-commons</artifactId>
+        <version>${spring-data-commons.version}</version>
+        <scope>provided</scope>
+        <classifier>sources</classifier>
+      </dependency>
+
+      <dependency>
+        <groupId>org.springframework.session</groupId>
+        <artifactId>spring-session-core</artifactId>
+        <version>${spring-session.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.session</groupId>
+        <artifactId>spring-session-jdbc</artifactId>
+        <version>${spring-session.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.session</groupId>
+        <artifactId>spring-session-data-redis</artifactId>
+        <version>${spring-session.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.springframework.data</groupId>
+        <artifactId>spring-data-jpa</artifactId>
+        <version>${spring-data-jpa.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.thymeleaf.extras</groupId>
+        <artifactId>thymeleaf-extras-springsecurity6</artifactId>
+        <version>${thymeleaf-extras-springsecurity6.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>ch.sbb</groupId>
+        <artifactId>springboot-graceful-shutdown</artifactId>
+        <version>${springboot-graceful-shutdown.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>io.lettuce</groupId>
+        <artifactId>lettuce-core</artifactId>
+        <version>${lettuce.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.passay</groupId>
+        <artifactId>passay</artifactId>
+        <version>${passay.version}</version>
+      </dependency>
+
+      <!-- Feign -->
+      <dependency>
+        <groupId>com.netflix.feign</groupId>
+        <artifactId>feign-core</artifactId>
+        <version>${feign.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.netflix.feign</groupId>
+        <artifactId>feign-gson</artifactId>
+        <version>${feign.version}</version>
+      </dependency>
+
+      <!-- GwtMaterial -->
+      <dependency>
+        <groupId>com.github.gwtmaterialdesign</groupId>
+        <artifactId>gwt-material</artifactId>
+        <version>${gwt-material.version}</version>
+        <exclusions>
+          <exclusion>
+            <groupId>com.google.gwt</groupId>
+            <artifactId>gwt-user</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>com.google.gwt</groupId>
+            <artifactId>gwt-dev</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>org.gwtproject</groupId>
+            <artifactId>gwt-user</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>org.gwtproject</groupId>
+            <artifactId>gwt-dev</artifactId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+      <dependency>
+        <groupId>com.github.gwtmaterialdesign</groupId>
+        <artifactId>gwt-material-themes</artifactId>
+        <version>${gwt-material.version}</version>
+        <exclusions>
+          <exclusion>
+            <groupId>com.google.gwt</groupId>
+            <artifactId>gwt-user</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>com.google.gwt</groupId>
+            <artifactId>gwt-dev</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>org.gwtproject</groupId>
+            <artifactId>gwt-user</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>org.gwtproject</groupId>
+            <artifactId>gwt-dev</artifactId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+      <dependency>
+        <groupId>com.github.gwtmaterialdesign</groupId>
+        <artifactId>gwt-material-addins</artifactId>
+        <version>${gwt-material.version}</version>
+        <exclusions>
+          <exclusion>
+            <groupId>com.google.gwt</groupId>
+            <artifactId>gwt-user</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>com.google.gwt</groupId>
+            <artifactId>gwt-dev</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>org.gwtproject</groupId>
+            <artifactId>gwt-user</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>org.gwtproject</groupId>
+            <artifactId>gwt-dev</artifactId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+      <dependency>
+        <groupId>com.github.gwtmaterialdesign</groupId>
+        <artifactId>gwt-material-table</artifactId>
+        <version>${gwt-material.version}</version>
+        <exclusions>
+          <exclusion>
+            <groupId>com.google.gwt</groupId>
+            <artifactId>gwt-user</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>com.google.gwt</groupId>
+            <artifactId>gwt-dev</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>org.gwtproject</groupId>
+            <artifactId>gwt-user</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>org.gwtproject</groupId>
+            <artifactId>gwt-dev</artifactId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+      <dependency>
+        <groupId>com.github.gwtmaterialdesign</groupId>
+        <artifactId>gwt-material-jquery</artifactId>
+        <version>${gwt-material.version}</version>
+        <exclusions>
+          <exclusion>
+            <groupId>com.google.gwt</groupId>
+            <artifactId>gwt-user</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>com.google.gwt</groupId>
+            <artifactId>gwt-dev</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>org.gwtproject</groupId>
+            <artifactId>gwt-user</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>org.gwtproject</groupId>
+            <artifactId>gwt-dev</artifactId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+      <dependency>
+        <groupId>com.github.gwtmaterialdesign</groupId>
+        <artifactId>gwt-material-amcharts</artifactId>
+        <version>${gwt-material.version}</version>
+        <exclusions>
+          <exclusion>
+            <groupId>com.google.gwt</groupId>
+            <artifactId>gwt-user</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>com.google.gwt</groupId>
+            <artifactId>gwt-dev</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>org.gwtproject</groupId>
+            <artifactId>gwt-user</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>org.gwtproject</groupId>
+            <artifactId>gwt-dev</artifactId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+      <dependency>
+        <groupId>com.github.gwtmaterialdesign</groupId>
+        <artifactId>gwt-material-am4charts</artifactId>
+        <version>${gwt-material.version}</version>
+        <exclusions>
+          <exclusion>
+            <groupId>com.google.gwt</groupId>
+            <artifactId>gwt-user</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>com.google.gwt</groupId>
+            <artifactId>gwt-dev</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>org.gwtproject</groupId>
+            <artifactId>gwt-user</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>org.gwtproject</groupId>
+            <artifactId>gwt-dev</artifactId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+
+      <dependency>
+        <groupId>com.google.elemental2</groupId>
+        <artifactId>elemental2-core</artifactId>
+        <version>${elemental2.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.google.elemental2</groupId>
+        <artifactId>elemental2-promise</artifactId>
+        <version>${elemental2.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.google.elemental2</groupId>
+        <artifactId>elemental2-dom</artifactId>
+        <version>${elemental2.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.google.elemental2</groupId>
+        <artifactId>elemental2-media</artifactId>
+        <version>${elemental2.version}</version>
+      </dependency>
+
+      <!-- Note: only used in GWT shared libs (dont support Jakarta yet) -->
+      <dependency>
+        <groupId>javax.annotation</groupId>
+        <artifactId>javax.annotation-api</artifactId>
+        <version>${javax.annotation.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>javax.annotation</groupId>
+        <artifactId>javax.annotation-api</artifactId>
+        <version>${javax.annotation.version}</version>
+        <classifier>sources</classifier>
+      </dependency>
+
+      <!-- Jakarta EE -->
+      <dependency>
+        <groupId>jakarta.servlet</groupId>
+        <artifactId>jakarta.servlet-api</artifactId>
+        <version>${jakarta.servlet.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>jakarta.annotation</groupId>
+        <artifactId>jakarta.annotation-api</artifactId>
+        <version>${jakarta.annotation.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>jakarta.annotation</groupId>
+        <artifactId>jakarta.annotation-api</artifactId>
+        <version>${jakarta.annotation.version}</version>
+        <classifier>sources</classifier>
+      </dependency>
+      <dependency>
+        <groupId>jakarta.validation</groupId>
+        <artifactId>jakarta.validation-api</artifactId>
+        <version>${jakarta.validation.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>jakarta.validation</groupId>
+        <artifactId>jakarta.validation-api</artifactId>
+        <version>${jakarta.validation.version}</version>
+        <classifier>sources</classifier>
+      </dependency>
+      <dependency>
+        <groupId>jakarta.persistence</groupId>
+        <artifactId>jakarta.persistence-api</artifactId>
+        <version>${jakarta.persistence.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>jakarta.persistence</groupId>
+        <artifactId>jakarta.persistence-api</artifactId>
+        <version>${jakarta.persistence.version}</version>
+        <classifier>sources</classifier>
+      </dependency>
+      <dependency>
+        <groupId>jakarta.xml.ws</groupId>
+        <artifactId>jakarta.xml.ws-api</artifactId>
+        <version>${jakarta.xml.ws.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>jakarta.ws.rs</groupId>
+        <artifactId>jakarta.ws.rs-api</artifactId>
+        <version>${jakarta.ws.rs.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>jakarta.el</groupId>
+        <artifactId>jakarta.el-api</artifactId>
+        <version>${jakarta.el.version}</version>
+        <scope>test</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>com.sun.xml.ws</groupId>
+        <artifactId>jaxws-ri</artifactId>
+        <version>${jaxws-ri.version}</version>
+        <type>pom</type>
+      </dependency>
+
+      <dependency>
+        <groupId>com.google.code.gson</groupId>
+        <artifactId>gson</artifactId>
+        <version>${gson.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.jboss.auto</groupId>
+        <artifactId>apt-tools</artifactId>
+        <version>${apt-tools.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.google.auto.service</groupId>
+        <artifactId>auto-service</artifactId>
+        <version>${auto-service.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.google.auto.service</groupId>
+        <artifactId>auto-service-annotations</artifactId>
+        <version>${auto-service.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.google.guava</groupId>
+        <artifactId>guava</artifactId>
+        <version>${guava.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.google.api-client</groupId>
+        <artifactId>google-api-client</artifactId>
+        <version>${google-api-client.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.google.api</groupId>
+        <artifactId>gax</artifactId>
+        <version>${google-api-gax.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.google.api</groupId>
+        <artifactId>gax-grpc</artifactId>
+        <version>${google-api-gax.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.google.cloud</groupId>
+        <artifactId>google-cloud-recaptchaenterprise</artifactId>
+        <version>${google-cloud-recaptchaenterprise.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.github.misberner.ap-commons</groupId>
+        <artifactId>ap-commons</artifactId>
+        <version>${ap-commons.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.ant</groupId>
+        <artifactId>ant</artifactId>
+        <version>${ant.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>commons-configuration</groupId>
+        <artifactId>commons-configuration</artifactId>
+        <version>${commons-configuration.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>commons-beanutils</groupId>
+        <artifactId>commons-beanutils</artifactId>
+        <version>${commons-beanutils.version}</version>
+      </dependency>
+
+      <!-- Http Components -->
+      <dependency>
+        <groupId>org.apache.httpcomponents</groupId>
+        <artifactId>httpcore</artifactId>
+        <version>${httpcore.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.httpcomponents</groupId>
+        <artifactId>httpclient</artifactId>
+        <version>${httpclient.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.httpcomponents.client5</groupId>
+        <artifactId>httpclient5</artifactId>
+        <version>${httpclient5.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.httpcomponents</groupId>
+        <artifactId>httpcore-nio</artifactId>
+        <version>${httpcore-nio.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.httpcomponents</groupId>
+        <artifactId>httpasyncclient</artifactId>
+        <version>${httpasyncclient.version}</version>
+      </dependency>
+
+      <!-- JWT -->
+      <dependency>
+        <groupId>io.jsonwebtoken</groupId>
+        <artifactId>jjwt</artifactId>
+        <version>${jjwt.version}</version>
+      </dependency>
+
+      <!-- Beanstream -->
+      <dependency>
+        <groupId>com.beanstream.api</groupId>
+        <artifactId>beanstream</artifactId>
+        <version>${beanstream.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.imgscalr</groupId>
+        <artifactId>imgscalr-lib</artifactId>
+        <version>${imgscalr-lib.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.evanlennick</groupId>
+        <artifactId>retry4j</artifactId>
+        <version>${retry4j.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.reflections</groupId>
+        <artifactId>reflections</artifactId>
+        <version>${reflections.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.google.inject</groupId>
+        <artifactId>guice</artifactId>
+        <version>${guice.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.freemarker</groupId>
+        <artifactId>freemarker</artifactId>
+        <version>${freemarker.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.googlecode.libphonenumber</groupId>
+        <artifactId>libphonenumber</artifactId>
+        <version>${libphonenumber.version}</version>
+      </dependency>
+
+      <!-- AspectJ -->
+      <dependency>
+        <groupId>org.aspectj</groupId>
+        <artifactId>aspectjweaver</artifactId>
+        <version>${aspectj.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.aspectj</groupId>
+        <artifactId>aspectjrt</artifactId>
+        <version>${aspectj.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.aspectj</groupId>
+        <artifactId>aspectjtools</artifactId>
+        <version>${aspectj.version}</version>
+      </dependency>
+
+      <!-- Apache Commons -->
+      <dependency>
+        <groupId>commons-fileupload</groupId>
+        <artifactId>commons-fileupload</artifactId>
+        <version>${commons-fileupload.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>commons-io</groupId>
+        <artifactId>commons-io</artifactId>
+        <version>${commons-io.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-compress</artifactId>
+        <version>${commons-compress.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.ow2.asm</groupId>
+        <artifactId>asm</artifactId>
+        <version>${asm.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.apache.pdfbox</groupId>
+        <artifactId>pdfbox</artifactId>
+        <version>${pdfbox.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.json</groupId>
+        <artifactId>json</artifactId>
+        <version>${json.version}</version>
+      </dependency>
+
+      <!-- Jaxb API -->
+      <dependency>
+        <groupId>com.sun.xml.ws</groupId>
+        <artifactId>jaxws-rt</artifactId>
+        <version>${jaxws-rt.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.github.hervian</groupId>
+        <artifactId>safety-mirror</artifactId>
+        <version>${safety-mirror.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.jetbrains</groupId>
+        <artifactId>annotations</artifactId>
+        <version>${jetbrains.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>joda-time</groupId>
+        <artifactId>joda-time</artifactId>
+        <version>${joda-time.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.atteo</groupId>
+        <artifactId>evo-inflector</artifactId>
+        <version>${evo-inflector.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>net.sf.jasperreports</groupId>
+        <artifactId>jasperreports</artifactId>
+        <version>${jasperreports.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.aspose</groupId>
+        <artifactId>aspose-words</artifactId>
+        <version>${aspose-words.version}</version>
+        <classifier>jdk17</classifier>
+      </dependency>
+
+      <dependency>
+        <groupId>com.googlecode.owasp-java-html-sanitizer</groupId>
+        <artifactId>owasp-java-html-sanitizer</artifactId>
+        <version>${owasp-java-html-sanitizer.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.googlecode.owasp-java-html-sanitizer</groupId>
+        <artifactId>owasp-java-html-sanitizer</artifactId>
+        <version>${owasp-java-html-sanitizer.version}</version>
+        <classifier>sources</classifier>
+      </dependency>
+
+      <dependency>
+        <groupId>io.netty</groupId>
+        <artifactId>netty-handler</artifactId>
+        <version>${netty.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+        <version>${lombok.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+        <version>${lombok.version}</version>
+        <classifier>sources</classifier>
+      </dependency>
+      <dependency>
+        <groupId>org.jboss.aerogear</groupId>
+        <artifactId>aerogear-otp-java</artifactId>
+        <version>${aerogear-otp-java.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.twilio.sdk</groupId>
+        <artifactId>twilio</artifactId>
+        <version>${twilio.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.yaml</groupId>
+        <artifactId>snakeyaml</artifactId>
+        <version>${snakeyaml.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>ch.qos.logback</groupId>
+        <artifactId>logback-classic</artifactId>
+        <version>${logback.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>ch.qos.logback</groupId>
+        <artifactId>logback-core</artifactId>
+        <version>${logback.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.logtail</groupId>
+        <artifactId>logback-logtail</artifactId>
+        <version>${logback-logtail.version}</version>
+      </dependency>
+
+      <!-- JUnit -->
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>${junit.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.openrewrite.maven</groupId>
+        <artifactId>rewrite-maven-plugin</artifactId>
+        <version>6.8.1</version>
+        <configuration>
+          <exportDatatables>true</exportDatatables>
+          <activeRecipes>
+            <recipe>org.openrewrite.java.migrate.UpgradeToJava17</recipe>
+            <recipe>org.openrewrite.java.spring.http.SpringWebDependency</recipe>
+            <recipe>org.openrewrite.java.spring.framework.UpgradeSpringFramework_6_2</recipe>
+            <recipe>org.openrewrite.java.spring.boot3.UpgradeSpringBoot_3_2</recipe>
+            <recipe>org.openrewrite.java.spring.security6.UpgradeSpringSecurity_6_0</recipe>
+            <recipe>org.openrewrite.java.spring.boot3.MigrateThymeleafDependencies</recipe>
+            <recipe>org.openrewrite.java.spring.cloud2023.UpgradeSpringCloud_2023</recipe>
+            <recipe>org.openrewrite.java.spring.data.UpgradeSpringData_2_7</recipe>
+          </activeRecipes>
+        </configuration>
+        <dependencies>
+          <dependency>
+            <groupId>org.openrewrite.recipe</groupId>
+            <artifactId>rewrite-spring</artifactId>
+            <version>6.7.0</version>
+          </dependency>
+        </dependencies>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>

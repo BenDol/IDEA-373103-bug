@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.insclix</groupId>
+    <artifactId>insclix-app-bcp</artifactId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+
+  <artifactId>insclix-app-bcp-client</artifactId>
+  <packaging>gwt-app</packaging>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+    <main.basedir>${project.parent.basedir}</main.basedir>
+
+    <errai.dev.context>${moduleName}</errai.dev.context>
+    <errai.client.class.pattern>.*</errai.client.class.pattern>
+
+    <hibernate-validator.version>4.1.0.Final</hibernate-validator.version>
+    <javax-validation-api.version>1.0.0.GA</javax-validation-api.version>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>insclix-app-bcp-shared</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>insclix-app-bcp-shared</artifactId>
+      <version>${project.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+
+    <dependency>
+      <groupId>com.insclix.core</groupId>
+      <artifactId>insclix-shared</artifactId>
+      <version>${insclix-core.version}</version>
+    </dependency>
+
+    <!-- Gwt -->
+    <dependency>
+      <groupId>org.gwtproject</groupId>
+      <artifactId>gwt-user</artifactId>
+      <version>2.12.2</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.gwtproject</groupId>
+      <artifactId>gwt-dev</artifactId>
+      <version>2.12.2</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <!-- Gwt Material -->
+    <dependency>
+      <groupId>com.github.gwtmaterialdesign</groupId>
+      <artifactId>gwt-material</artifactId>
+      <version>2.8.5</version>
+    </dependency>
+    <dependency>
+      <groupId>com.github.gwtmaterialdesign</groupId>
+      <artifactId>gwt-material-themes</artifactId>
+      <version>2.8.5</version>
+    </dependency>
+    <dependency>
+      <groupId>com.github.gwtmaterialdesign</groupId>
+      <artifactId>gwt-material-addins</artifactId>
+      <version>2.8.5</version>
+    </dependency>
+    <dependency>
+      <groupId>com.github.gwtmaterialdesign</groupId>
+      <artifactId>gwt-material-jquery</artifactId>
+      <version>2.8.5</version>
+    </dependency>
+    <dependency>
+      <groupId>com.github.gwtmaterialdesign</groupId>
+      <artifactId>gwt-material-table</artifactId>
+      <version>2.8.5</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-validator</artifactId>
+      <version>${hibernate-validator.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-validator</artifactId>
+      <version>${hibernate-validator.version}</version>
+      <classifier>sources</classifier>
+      <scope>compile</scope>
+    </dependency>
+
+    <!-- Javax -->
+    <!-- Required for Hibernate Validation -->
+    <dependency>
+      <groupId>javax.validation</groupId>
+      <artifactId>validation-api</artifactId>
+      <version>${javax-validation-api.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>javax.validation</groupId>
+      <artifactId>validation-api</artifactId>
+      <version>${javax-validation-api.version}</version>
+      <classifier>sources</classifier>
+      <scope>provided</scope>
+    </dependency>
+
+    <!-- Testing -->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <finalName>${projectName}</finalName>
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <filtering>true</filtering>
+        <includes>
+          <include>**/Version.properties</include>
+        </includes>
+      </resource>
+      <resource>
+        <directory>src/main/resources</directory>
+        <filtering>false</filtering>
+        <excludes>
+          <exclude>**/Version.properties</exclude>
+        </excludes>
+      </resource>
+    </resources>
+
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-resources-plugin</artifactId>
+        <executions>
+          <execution>
+            <phase>generate-resources</phase>
+            <goals>
+              <goal>resources</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>${java-client.version}</source>
+          <target>${java-client.version}</target>
+        </configuration>
+      </plugin>
+
+      <!--<plugin>
+        <groupId>net.ltgt.gwt.maven</groupId>
+        <artifactId>gwt-maven-plugin</artifactId>
+        <configuration>
+          <moduleName>com.insclix.bcp.App</moduleName>
+          <localWorkers>1</localWorkers>
+          <sourceLevel>1.11</sourceLevel>
+          <jvmArgs combine.children="append">
+            <jvmArg>-Dgwt.persistentunitcachedir=${project.build.directory}</jvmArg>
+            <jvmArg>-Derrai.marshalling.force_static_marshallers</jvmArg>
+            <jvmArg>-Derrai.marshalling.very_short_names</jvmArg>
+            <jvmArg>-Derrai.marshalling.server.classOutput=${main.basedir}/server/target/classes</jvmArg>
+            <jvmArg>-Derrai.codegen.details=true</jvmArg>
+            <jvmArg>&#45;&#45;add-opens</jvmArg><jvmArg>java.base/java.lang=ALL-UNNAMED</jvmArg>
+            <jvmArg>&#45;&#45;add-opens</jvmArg><jvmArg>java.base/java.util=ALL-UNNAMED</jvmArg>
+          </jvmArgs>
+          <skipModule>true</skipModule>
+          <deploy>${project.build.directory}/gwt-deploy</deploy>
+          <warDir>${webappDirectory}</warDir>
+          <launcherDir>${webappDirectory}</launcherDir>
+          <webappDirectory>${webappDirectory}</webappDirectory>
+          <logLevel>INFO</logLevel>
+        </configuration>
+        <executions>
+          <execution>
+            <phase>compile</phase>
+            <id>default-compile</id>
+            &lt;!&ndash;suppress MavenModelInspection&ndash;&gt;
+            <configuration combine.children="override">
+              <skipCompilation>true</skipCompilation>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>-->
+
+      <!-- Override MaterializeCss -->
+      <plugin>
+        <groupId>com.github.warmuuh</groupId>
+        <artifactId>libsass-maven-plugin</artifactId>
+        <version>0.2.10-libsass_3.5.3</version>
+        <executions>
+          <execution>
+            <phase>generate-resources</phase>
+            <goals>
+              <goal>compile</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <inputPath>gwt-material-themes/src/main/sass</inputPath>
+          <outputPath>${basedir}/target/</outputPath>
+          <includePath>${basedir}/src/main/sass/plugins/</includePath>
+          <generateSourceMap>false</generateSourceMap>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <artifactId>maven-clean-plugin</artifactId>
+        <version>${maven-clean-plugin.version}</version>
+        <configuration>
+          <filesets>
+            <fileset>
+              <directory>${main.basedir}/server/target</directory>
+              <includes>
+                <include>classes/static/WEB-INF/classes/org/jboss/errai/**</include>
+                <include>classes/static/${moduleName}/**</include>
+                <include>classes/static/service-worker.js</include>
+                <include>classes/org/jboss/errai/ServerMarshallingFactoryImpl*.class</include>
+                <include>bridge/**</include>
+              </includes>
+            </fileset>
+            <fileset>
+              <directory>${main.basedir}/shared/target</directory>
+              <includes>
+                <include>bridge/**</include>
+              </includes>
+            </fileset>
+          </filesets>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>license-maven-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </build>
+
+  <profiles>
+    <profile>
+      <id>dev</id>
+
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>net.ltgt.gwt.maven</groupId>
+            <artifactId>gwt-maven-plugin</artifactId>
+            <!--suppress MavenModelInspection -->
+            <configuration combine.children="merge">
+              <moduleName>com.insclix.bcp.AppDev</moduleName>
+              <style>PRETTY</style>
+              <localWorkers>1C</localWorkers>
+              <draftCompile>true</draftCompile>
+              <optimize>0</optimize>
+              <jvmArgs combine.children="append">
+                <jvmArg combine.self="override">-Derrai.marshalling.force_static_marshallers=false</jvmArg>
+              </jvmArgs>
+              <compilerArgs combine.self="override"/>
+            </configuration>
+          </plugin>
+
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-resources-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>copy-gwt-artifacts</id>
+                <phase>package</phase>
+                <goals>
+                  <goal>resources</goal>
+                </goals>
+                <configuration>
+                  <outputDirectory>../server/src/main/resources/static/${moduleName}</outputDirectory>
+                  <overwrite>true</overwrite>
+                  <includeEmptyDirs>true</includeEmptyDirs>
+
+                  <resources>
+                    <resource>
+                      <directory>../server/target/classes/static/${moduleName}</directory>
+                      <!-- We can set <includes> or <excludes> if we want to limit what gets copied -->
+                    </resource>
+                  </resources>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+    <profile>
+      <id>staging</id>
+
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>net.ltgt.gwt.maven</groupId>
+            <artifactId>gwt-maven-plugin</artifactId>
+            <!-- Staging uses same as production -->
+            <!-- Below is a workaround for file name too long error -->
+            <!--jvmArg>-Dgwt.jjs.permutationWorkerFactory=com.google.gwt.dev.ThreadedPermutationWorkerFactory</jvmArg>
+            <jvmArg>-Dgwt.jjs.maxThreads=2</jvmArg-->
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+    <profile>
+      <id>dev-k8s</id>
+
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>net.ltgt.gwt.maven</groupId>
+            <artifactId>gwt-maven-plugin</artifactId>
+            <!-- Development uses same as staging -->
+            <!-- Below is a workaround for file name too long error -->
+            <!--jvmArg>-Dgwt.jjs.permutationWorkerFactory=com.google.gwt.dev.ThreadedPermutationWorkerFactory</jvmArg>
+            <jvmArg>-Dgwt.jjs.maxThreads=2</jvmArg-->
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+
+</project>

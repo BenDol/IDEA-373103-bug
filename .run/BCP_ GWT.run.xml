@@ -1,0 +1,14 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="BCP: GWT" type="GWT.ConfigurationType" factoryName="GWT Configuration">
+    <option name="VM_PARAMETERS" value="-Xmx8g -Xms8g --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED -Derrai.marshalling.detailed=true -Derrai.codegen.details=true -Derrai.marshalling.force_static_marshallers=false" />
+    <option name="SHELL_PARAMETERS" value="-noserver -style PRETTY -war $PROJECT_DIR$/server/target/classes/static -strict" />
+    <option name="GWT_MODULE" value="com.insclix.bcp.AppDev" />
+    <option name="OPEN_IN_BROWSER" value="false" />
+    <option name="USE_SUPER_DEV_MODE" value="true" />
+    <option name="WORKING_DIRECTORY" value="" />
+    <module name="insclix-app-bcp-client" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

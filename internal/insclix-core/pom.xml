@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>3.5.0</version>
+    <relativePath/>
+  </parent>
+
+  <groupId>com.insclix.core</groupId>
+  <artifactId>insclix-core-parent</artifactId>
+  <version>3.0.1-SNAPSHOT</version>
+
+  <packaging>pom</packaging>
+
+  <properties>
+    <project.encoding>UTF-8</project.encoding>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+    <wap-name>wap-connect-core-client</wap-name>
+    <wap-group>com.walkaway.connect</wap-group>
+
+    <skipTests>false</skipTests>
+    <core.skipGwtCompile>true</core.skipGwtCompile>
+    <core.skipDeploy>false</core.skipDeploy>
+    <java.version>17</java.version>
+    <java-client.version>11</java-client.version>
+
+    <errai.version>4.14.0.Final</errai.version>
+    <errai-spring.version>0.3.4</errai-spring.version>
+    <errai.dev.context>${project.artifactId}</errai.dev.context>
+    <errai.client.class.pattern>.*/client/.*</errai.client.class.pattern>
+
+    <spring-cloud-gcp.version>6.2.0</spring-cloud-gcp.version>
+
+    <lombok.version>1.18.30</lombok.version>
+
+    <!-- maven plugins -->
+    <gwt-maven-plugin.version>1.1.0</gwt-maven-plugin.version>
+    <maven-war-plugin.version>3.4.0</maven-war-plugin.version>
+    <maven-clean-plugin.version>3.4.1</maven-clean-plugin.version>
+    <maven-dependency-plugin.version>3.8.1</maven-dependency-plugin.version>
+    <maven-jar-plugin.version>3.4.2</maven-jar-plugin.version>
+    <maven-compiler-plugin.version>3.14.0</maven-compiler-plugin.version>
+    <maven-deploy-plugin.version>3.1.4</maven-deploy-plugin.version>
+    <maven-source-plugin.version>3.3.1</maven-source-plugin.version>
+    <maven-surefire-plugin.version>3.5.3</maven-surefire-plugin.version>
+    <maven-resources-plugin.version>3.3.1</maven-resources-plugin.version>
+    <license-maven-plugin.version>2.5.0</license-maven-plugin.version>
+    <lombok-plugin.version>1.18.20.0</lombok-plugin.version>
+    <build-helper-plugin.version>3.6.0</build-helper-plugin.version>
+  </properties>
+
+  <modules>
+    <module>insclix-core-bom</module>
+    <module>insclix-shared</module>
+  </modules>
+
+  <!-- Repositories -->
+  <repositories>
+    <repository>
+      <id>central</id>
+      <name>Central Repository</name>
+      <url>https://repo.maven.apache.org/maven2</url>
+    </repository>
+    <repository>
+      <id>sonatype-nexus-snapshot</id>
+      <name>Sonatype Nexus snapshot repository</name>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+    </repository>
+    <repository>
+      <id>repo.spring.io</id>
+      <name>Spring Release Repository</name>
+      <url>https://repo.spring.io/libs-release-local</url>
+    </repository>
+    <repository>
+      <id>spring-milestone</id>
+      <name>Spring Milestone Repository</name>
+      <url>https://repo.spring.io/milestone</url>
+    </repository>
+  </repositories>
+
+  <pluginRepositories>
+    <pluginRepository>
+      <id>public-snapshots-repo</id>
+      <url>https://oss.sonatype.org/content/repositories/public/</url>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </pluginRepository>
+  </pluginRepositories>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <configuration>
+            <skip>true</skip>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-source-plugin</artifactId>
+          <version>${maven-source-plugin.version}</version>
+          <executions>
+            <execution>
+              <goals>
+                <goal>jar-no-fork</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+
+    <plugins>
+      <plugin>
+        <groupId>org.openrewrite.maven</groupId>
+        <artifactId>rewrite-maven-plugin</artifactId>
+        <version>6.8.1</version>
+        <configuration>
+          <exportDatatables>true</exportDatatables>
+          <activeRecipes>
+            <recipe>org.openrewrite.java.migrate.UpgradeToJava17</recipe>
+            <recipe>org.openrewrite.java.spring.http.SpringWebDependency</recipe>
+            <recipe>org.openrewrite.java.spring.framework.UpgradeSpringFramework_6_2</recipe>
+            <recipe>org.openrewrite.java.spring.boot3.UpgradeSpringBoot_3_2</recipe>
+            <recipe>org.openrewrite.java.spring.security6.UpgradeSpringSecurity_6_0</recipe>
+            <recipe>org.openrewrite.java.spring.boot3.MigrateThymeleafDependencies</recipe>
+            <recipe>org.openrewrite.java.spring.cloud2023.UpgradeSpringCloud_2023</recipe>
+            <recipe>org.openrewrite.java.spring.data.UpgradeSpringData_2_7</recipe>
+          </activeRecipes>
+        </configuration>
+        <dependencies>
+          <dependency>
+            <groupId>org.openrewrite.recipe</groupId>
+            <artifactId>rewrite-spring</artifactId>
+            <version>6.7.0</version>
+          </dependency>
+        </dependencies>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>${maven-compiler-plugin.version}</version>
+        <configuration>
+          <source>${java.version}</source>
+          <target>${java.version}</target>
+          <encoding>${project.build.sourceEncoding}</encoding>
+          <generatedSourcesDirectory>${project.build.directory}/generated-sources/annotations</generatedSourcesDirectory>
+          <generatedTestSourcesDirectory>${project.build.directory}/generated-test-sources/test-annotations</generatedTestSourcesDirectory>
+          <compilerArgs>
+            <arg>--add-opens</arg><arg>java.base/java.lang=ALL-UNNAMED</arg>
+          </compilerArgs>
+        </configuration>
+      </plugin>
+
+      <!-- Tests are skipped by default because they require additional GWT dependencies.
+         Run mvn with -Pintegration-test to enable testing. -->
+      <plugin>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>${maven-surefire-plugin.version}</version>
+        <configuration>
+          <skipTests>${skipTests}</skipTests>
+          <!--test>*Test.java</test-->
+          <failIfNoSpecifiedTests>false</failIfNoSpecifiedTests>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-deploy-plugin</artifactId>
+        <configuration>
+          <skip>true</skip>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+  <dependencyManagement>
+    <dependencies>
+      <!-- Spring Cloud GCP -->
+      <dependency>
+        <groupId>com.google.cloud</groupId>
+        <artifactId>spring-cloud-gcp-dependencies</artifactId>
+        <version>${spring-cloud-gcp.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-web</artifactId>
+        <version>${spring-framework.version}</version>
+        <classifier>sources</classifier>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.security</groupId>
+        <artifactId>spring-security-core</artifactId>
+        <version>${spring-security.version}</version>
+        <classifier>sources</classifier>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.security</groupId>
+        <artifactId>spring-security-oauth2-core</artifactId>
+        <version>${spring-security.version}</version>
+        <classifier>sources</classifier>
+      </dependency>
+
+      <dependency>
+        <groupId>com.insclix.core</groupId>
+        <artifactId>insclix-core-bom</artifactId>
+        <version>${project.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <dependencies>
+    <!-- Runtime / Container dependencies -->
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>${slf4j.version}</version>
+    </dependency>
+  </dependencies>
+
+  <profiles>
+    <profile>
+      <id>skip-tests</id>
+      <properties>
+        <skipTests>true</skipTests>
+      </properties>
+    </profile>
+    <profile>
+      <id>core.deploy</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+        <property>
+          <name>!core.skipDeploy</name>
+        </property>
+      </activation>
+      <properties>
+        <core.skipDeploy>false</core.skipDeploy>
+      </properties>
+      <build>
+        <pluginManagement>
+          <plugins>
+            <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-deploy-plugin</artifactId>
+              <configuration>
+                <skip>true</skip>
+              </configuration>
+            </plugin>
+          </plugins>
+        </pluginManagement>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-deploy-plugin</artifactId>
+            <configuration>
+              <skip>true</skip>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <id>core.skip-deploy</id>
+      <properties>
+        <core.skipDeploy>true</core.skipDeploy>
+      </properties>
+    </profile>
+    <profile>
+      <id>core.gwt-compile</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <properties>
+        <core.skipGwtCompile>false</core.skipGwtCompile>
+      </properties>
+    </profile>
+    <profile>
+      <id>submodules</id>
+      <properties>
+        <core.skipDeploy>true</core.skipDeploy>
+      </properties>
+    </profile>
+    <profile>
+      <id>incubator</id>
+      <modules>
+        <module>insclix-alert</module>
+      </modules>
+    </profile>
+    <profile>
+      <id>include-apt</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+    </profile>
+  </profiles>
+</project>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module>
+  <source path=''>
+    <include name="core/GrantedAuthority.java"/>
+    <include name="core/userdetails/UserDetails.java"/>
+  </source>
+</module>

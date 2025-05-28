@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module>
+  <source path="">
+    <include name="HttpStatusCode.java"/>
+    <include name="DefaultHttpStatusCode.java"/>
+    <include name="HttpStatus.java"/>
+  </source>
+</module>

@@ -1,0 +1,6 @@
+**/gwt-unitCache/*
+target/*
+/**/*.iml
+node_modules/*
+pwa/node/*
+src/main/resources/static/brokerdirect

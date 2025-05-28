@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module>
+  <source path=''>
+    <include name="access/annotation/Secured.java"/>
+    <include name="access/AccessDeniedException.java"/>
+    <include name="core/AuthenticationException.java"/>
+    <include name="core/AuthenticatedPrincipal.java"/>
+  </source>
+</module>

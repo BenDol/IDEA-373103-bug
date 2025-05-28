@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.insclix.core</groupId>
+    <artifactId>insclix-core-parent</artifactId>
+    <version>3.0.1-SNAPSHOT</version>
+    <relativePath/> <!-- lookup parent from repository -->
+  </parent>
+
+  <groupId>com.insclix</groupId>
+  <artifactId>insclix-app-bcp</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <organization>
+    <name>Insclix</name>
+    <url>http://insclix.com/</url>
+  </organization>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <main.basedir>${project.basedir}</main.basedir>
+
+    <projectName>insclix-app-bcp</projectName>
+    <moduleName>brokerdirect</moduleName>
+    <active.profile>dev</active.profile>
+    <webappDirectory>${main.basedir}/server/target/classes/static</webappDirectory>
+    <skipTests>false</skipTests>
+
+    <!-- git -->
+    <git.commit.id>dev</git.commit.id>
+
+    <!-- core -->
+    <java.version>17</java.version>
+    <java-client.version>11</java-client.version>
+    <insclix-core.version>3.0.1-SNAPSHOT</insclix-core.version>
+
+    <!-- server -->
+    <tomcat.version>10.1.41</tomcat.version>
+    <jetty.version>12.0.21</jetty.version>
+    <spring-boot.version>3.5.0</spring-boot.version>
+    <!-- Temp fix for regression: https://github.com/GoogleCloudPlatform/spring-cloud-gcp/issues/3794#issuecomment-2909613423
+         Remove spring-context definition once they have fixed the issue. -->
+    <spring-context.version>6.2.6</spring-context.version>
+    <spring-framework.version>6.2.7</spring-framework.version>
+    <spring-security.version>6.5.0</spring-security.version>
+    <jakarta.validation.version>3.1.1</jakarta.validation.version>
+    <jakarta.persistence.version>3.2.0</jakarta.persistence.version>
+    <jakarta.xml.ws.version>4.0.2</jakarta.xml.ws.version>
+    <jakarta.ws.rs.version>4.0.0</jakarta.ws.rs.version>
+    <lettuce.version>6.6.0.RELEASE</lettuce.version>
+    <jersey.version>3.1.10</jersey.version>
+    <jackson-bom.version>2.19.0</jackson-bom.version>
+    <snakeyaml.version>2.4</snakeyaml.version>
+    <postgresql.version>42.7.5</postgresql.version>
+    <json-smart.version>2.5.2</json-smart.version>
+    <logback.version>1.5.18</logback.version>
+    <netty.version>4.2.1.Final</netty.version>
+    <protobuf-java.version>4.31.0</protobuf-java.version>
+
+    <!-- maven plugins -->
+    <gwt-maven-plugin.version>1.1.0</gwt-maven-plugin.version>
+    <maven-war-plugin.version>3.4.0</maven-war-plugin.version>
+    <maven-clean-plugin.version>3.4.1</maven-clean-plugin.version>
+    <maven-dependency-plugin.version>3.8.1</maven-dependency-plugin.version>
+    <maven-jar-plugin.version>3.4.2</maven-jar-plugin.version>
+    <maven-compiler-plugin.version>3.14.0</maven-compiler-plugin.version>
+    <maven-deploy-plugin.version>3.1.4</maven-deploy-plugin.version>
+    <maven-source-plugin.version>3.3.1</maven-source-plugin.version>
+    <maven-surefire-plugin.version>3.5.3</maven-surefire-plugin.version>
+    <maven-resources-plugin.version>3.3.1</maven-resources-plugin.version>
+    <license-maven-plugin.version>2.5.0</license-maven-plugin.version>
+    <lombok-plugin.version>1.18.20.0</lombok-plugin.version>
+    <build-helper-plugin.version>3.6.0</build-helper-plugin.version>
+    <git-commit-id-maven-plugin.version>4.9.10</git-commit-id-maven-plugin.version>
+  </properties>
+
+  <repositories>
+    <repository>
+      <id>spring-milestone</id>
+      <name>Spring Milestone Repository</name>
+      <url>https://repo.spring.io/milestone</url>
+    </repository>
+  </repositories>
+
+  <pluginRepositories>
+    <pluginRepository>
+      <id>public-snapshots-repo</id>
+      <url>https://oss.sonatype.org/content/repositories/public/</url>
+      <releases>
+      </releases>
+      <snapshots>
+      </snapshots>
+    </pluginRepository>
+  </pluginRepositories>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>com.google.protobuf</groupId>
+        <artifactId>protobuf-bom</artifactId>
+        <version>${protobuf-java.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>org.yaml</groupId>
+        <artifactId>snakeyaml</artifactId>
+        <version>${snakeyaml.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.insclix.core</groupId>
+        <artifactId>insclix-core-bom</artifactId>
+        <version>${insclix-core.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+      <!-- Temp fix for regression: https://github.com/GoogleCloudPlatform/spring-cloud-gcp/issues/3794#issuecomment-2909613423 -->
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-context</artifactId>
+        <version>${spring-context.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <dependencies>
+    <!-- Errai -->
+    <dependency>
+      <groupId>org.jboss.errai</groupId>
+      <artifactId>errai-common</artifactId>
+      <version>4.14.2.Final</version>
+    </dependency>
+    <dependency>
+      <groupId>org.jboss.errai</groupId>
+      <artifactId>errai-codegen-gwt</artifactId>
+      <version>4.14.2.Final</version>
+    </dependency>
+    <dependency>
+      <groupId>org.jboss.errai</groupId>
+      <artifactId>errai-ui</artifactId>
+      <version>4.14.2.Final</version>
+    </dependency>
+    <dependency>
+      <groupId>org.jboss.errai</groupId>
+      <artifactId>errai-cdi-client</artifactId>
+      <version>4.14.2.Final</version>
+    </dependency>
+    <dependency>
+      <groupId>org.jboss.errai</groupId>
+      <artifactId>errai-codegen</artifactId>
+      <version>4.14.2.Final</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.jboss.errai</groupId>
+      <artifactId>errai-ioc</artifactId>
+      <version>4.14.2.Final</version>
+    </dependency>
+    <dependency>
+      <groupId>org.jboss.errai</groupId>
+      <artifactId>errai-bus</artifactId>
+      <version>4.14.2.Final</version>
+    </dependency>
+    <dependency>
+      <groupId>org.jboss.errai</groupId>
+      <artifactId>errai-security-server</artifactId>
+      <version>4.14.2.Final</version>
+    </dependency>
+    <dependency>
+      <groupId>org.jboss.errai</groupId>
+      <artifactId>errai-security-client</artifactId>
+      <version>4.14.2.Final</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.openrewrite.maven</groupId>
+        <artifactId>rewrite-maven-plugin</artifactId>
+        <version>6.8.1</version>
+        <configuration>
+          <exportDatatables>true</exportDatatables>
+          <activeRecipes>
+            <recipe>org.openrewrite.java.migrate.UpgradeToJava17</recipe>
+            <recipe>org.openrewrite.java.spring.http.SpringWebDependency</recipe>
+            <recipe>org.openrewrite.java.spring.framework.UpgradeSpringFramework_6_2</recipe>
+            <!--<recipe>org.openrewrite.java.spring.boot3.UpgradeSpringBoot_3_2</recipe>-->
+            <recipe>org.openrewrite.java.spring.security6.UpgradeSpringSecurity_6_0</recipe>
+            <recipe>org.openrewrite.java.spring.boot3.MigrateThymeleafDependencies</recipe>
+            <recipe>org.openrewrite.java.spring.cloud2023.UpgradeSpringCloud_2023</recipe>
+            <recipe>org.openrewrite.java.spring.data.UpgradeSpringData_2_7</recipe>
+          </activeRecipes>
+        </configuration>
+        <dependencies>
+          <dependency>
+            <groupId>org.openrewrite.recipe</groupId>
+            <artifactId>rewrite-spring</artifactId>
+            <version>6.7.0</version>
+          </dependency>
+        </dependencies>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>${maven-compiler-plugin.version}</version>
+        <configuration>
+          <source>${java.version}</source>
+          <target>${java.version}</target>
+          <generatedSourcesDirectory>${project.build.directory}/generated-sources/annotations</generatedSourcesDirectory>
+          <encoding>${project.build.sourceEncoding}</encoding>
+          <meminitial>1024m</meminitial>
+          <maxmem>2024m</maxmem>
+          <compilerArgs>
+            <arg>--add-opens</arg><arg>java.base/java.lang=ALL-UNNAMED</arg>
+          </compilerArgs>
+        </configuration>
+      </plugin>
+
+      <!-- Tests are skipped by default because they require additional GWT dependencies.
+         Run mvn with -Pintegration-test to enable testing. -->
+      <plugin>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>${maven-surefire-plugin.version}</version>
+        <configuration>
+          <skipTests>${skipTests}</skipTests>
+        </configuration>
+      </plugin>
+    </plugins>
+
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>net.ltgt.gwt.maven</groupId>
+          <artifactId>gwt-maven-plugin</artifactId>
+          <version>${gwt-maven-plugin.version}</version>
+          <extensions>true</extensions>
+          <configuration>
+            <style>OBFUSCATED</style>
+            <logLevel>INFO</logLevel>
+            <sourceLevel>${java.version}</sourceLevel>
+            <!--localWorkers>1C</localWorkers-->
+            <optimize>9</optimize>
+            <jvmArgs>
+              <jvmArg>-Xmx6g</jvmArg>
+              <jvmArg>-Xms6g</jvmArg>
+              <jvmArg>-XX:CompileThreshold=6000</jvmArg>
+            </jvmArgs>
+            <!--compilerArgs>
+              <compilerArg>-compileReport</compilerArg>
+              <compilerArg>-XcompilerMetrics</compilerArg>
+            </compilerArgs-->
+            <classpathScope>compile+runtime</classpathScope>
+            <failOnError>true</failOnError>
+          </configuration>
+          <executions>
+            <execution>
+              <goals>
+                <goal>compile</goal>
+                <goal>test</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>${maven-resources-plugin.version}</version>
+          <configuration>
+            <propertiesEncoding>UTF-8</propertiesEncoding>
+          </configuration>
+        </plugin>
+
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>license-maven-plugin</artifactId>
+          <version>${license-maven-plugin.version}</version>
+          <configuration>
+            <licenseName>apache_v2</licenseName>
+            <lineLength>19</lineLength>
+            <inceptionYear>2017</inceptionYear>
+            <addJavaLicenseAfterPackage>false</addJavaLicenseAfterPackage>
+            <includes>
+              <include>**/*.java</include>
+              <include>**/*.xml</include>
+            </includes>
+          </configuration>
+          <executions>
+            <execution>
+              <id>license</id>
+              <phase>process-sources</phase>
+              <goals>
+                <goal>update-file-header</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+
+  <profiles>
+    <profile>
+      <id>dev</id>
+      <activation>
+        <property>
+          <name>active.profile</name>
+          <value>dev</value>
+        </property>
+      </activation>
+    </profile>
+    <profile>
+      <id>dev-k8s</id>
+    </profile>
+    <profile>
+      <id>incubator</id>
+    </profile>
+    <profile>
+      <id>include-apt</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+    </profile>
+  </profiles>
+
+  <modules>
+    <module>internal</module>
+    <module>bridge</module>
+    <module>shared</module>
+    <module>client</module>
+    <module>server</module>
+  </modules>
+</project>
